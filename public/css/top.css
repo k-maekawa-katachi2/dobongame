@@ -1,0 +1,36 @@
+body {
+background-image: url(../images/dobonTop.png);  
+background-size: cover;
+overflow-y:hidden;
+}
+
+.button{ 
+  position: absolute; 
+  top:80%; 
+  left:35%; 
+  width:20rem;
+  height: 5rem;
+  font-size: 20pt;
+  background: blue;
+  color:white;
+  cursor: pointer;
+}
+
+.button:hover{ 
+  position: absolute; 
+  top:80%; 
+  left:35%; 
+  width:20rem;
+  height: 5rem;
+  font-size: 20pt;
+  background: rgb(0, 174, 255);
+  color:white;
+  cursor: pointer;
+}
+
+button:active {
+  -webkit-transform: translate(0,2px);
+  -moz-transform: translate(0,2px);
+  transform: translate(0,2px);
+  border-bottom:none;
+  }
