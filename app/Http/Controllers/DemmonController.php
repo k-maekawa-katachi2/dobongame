@@ -16,7 +16,17 @@ class DemmonController extends Controller
         session()->put('kana_alls', $kana_alls);
 
         $demon_name = session()->get('demon_name');
-        //    dd($demon_name);
+        
+
+        // コンピュータの設定時の入力・・・次回はここから
+        if($demon_name == "computer"){
+
+
+
+
+
+
+        }
 
         return view(
             'games.demmon_words',
@@ -29,24 +39,6 @@ class DemmonController extends Controller
 
     public function enter(Request $request)
     {
-
-        // エラーチェック、デーモンの数字が規定値でなければエラー
-        // if ($request->demon_word1 < '11' || $request->demon_word1 > '83' || $request->demon_word1 == null) {
-        //     $msg = 'デーモンの言葉は11から83の間で半角で入れてください';
-
-
-        //       // セッションデーターを呼び出す
-        // $demon_name = session()->get('demon_name');
-        // $kana_alls = session()->get('kana_alls');
-        // return view(
-        //     'games.demmon_words',
-        //     [
-        //         'msg' => $msg,
-        //         'demon_name' => $demon_name,
-        //         'kana_alls' => $kana_alls
-        //     ]
-        // );
-        // }
 
         $word1 = $this->testCheck($request->demon_word1);
 
@@ -83,36 +75,6 @@ class DemmonController extends Controller
                 ]
             );
         }
-
-        // if ($request->demon_word2 < '11' || $request->demon_word2 > '83' || $request->demon_word2 == null) {
-        //     $msg = 'デーモンの言葉は11から83の間で半角で入れてください';
-        //       // セッションデーターを呼び出す
-        // $demon_name = session()->get('demon_name');
-        // $kana_alls = session()->get('kana_alls');
-        // return view(
-        //     'games.demmon_words',
-        //     [
-        //         'msg' => $msg,
-        //         'demon_name' => $demon_name,
-        //         'kana_alls' => $kana_alls
-        //     ]
-        // );
-        // }
-
-        // if ($request->demon_word3 < '11' || $request->demon_word3 > '83' || $request->demon_word3 == null) {
-        //     $msg = 'デーモンの言葉は11から83の間で半角で入れてください';
-        //       // セッションデーターを呼び出す
-        // $demon_name = session()->get('demon_name');
-        // $kana_alls = session()->get('kana_alls');
-        // return view(
-        //     'games.demmon_words',
-        //     [
-        //         'msg' => $msg,
-        //         'demon_name' => $demon_name,
-        //         'kana_alls' => $kana_alls
-        //     ]
-        // );
-        // }
 
 
 
@@ -163,10 +125,6 @@ class DemmonController extends Controller
         session(['demon_kana3' => $demon_kana3]);
         session(['first_player' => $first_player]);
 
-
-        // // turnのセッション情報を呼び出す
-        // $iturn = session()->get('turn');
-        // //    dd($iturn);
 
         return view('games.gameStart');
     }

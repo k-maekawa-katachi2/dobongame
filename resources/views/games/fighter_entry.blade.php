@@ -50,19 +50,21 @@
         <div class="row">
 
             <div class="col-6">
-                <form action="players" method="post">
+                <form action="players" method="post" name="player_form">
                     @csrf
                     <br>
                     <h4 style="margin-bottom:3rem;">{{ $next }}人目、ファイターの名前を入力してください</h4>
                     <input type="hidden" name="chara" value="2">
                     <input type="hidden" name="player_number" value="{{ $next }}">
-                    <input type="text" name="player" value="{{ old('player') }}">
+                    <p><strong id="err_name" style="color:red;"></strong></p>
+                    <input type="text" name="player">
 
+                   
                     <div class="row mt-3">
                         ファイターの人数を追加するときは「追加」ボタンを、全てのエントリー者の入力が終わったら「決定」を押してください
                     </div>
                     <br>
-                    <input type="submit" value="追加">
+                    <input type="submit" value="追加" onclick="return check()">
                 </form>
 
                 <form action="demmon_words" method="get">
@@ -78,49 +80,26 @@
                                     {{ $menber->player_number }}人目：{{ $menber->player }}
                                 </div>
                 </div>
-                                <div class="row justify-content-start">
-                                @else
-                                    <div class="col-3">
-                                        {{ $menber->player_number }}人目：{{ $menber->player }}
-                                    </div>
-                            @endif
-                        @endif
+                <div class="row justify-content-start">
+                @else
+                    <div class="col-3">
+                        {{ $menber->player_number }}人目：{{ $menber->player }}
+                    </div>
+                    @endif
+                    @endif
 
                     @endforeach
                 </div>
             </div>
 
             <div class="col-6">
-                <img class="img-fluid" src="{{ asset('images/fighter.png') }}" >
+                <img class="img-fluid" src="{{ asset('images/fighter.png') }}">
             </div>
         </div>
-
-
-        {{-- <div class="row">
-            <div class="col-6">
-                <div class="row justify-content-start mt-5">
-                    @foreach ($players as $menber)
-                        @if ($menber->chara == 2)
-                            @if ($menber->player_number % 3 == 0)
-                                <div class="col-2">
-                                    {{ $menber->player_number }}人目：{{ $menber->player }}
-                                </div>
-                                <div class="row justify-content-start">
-                            @else
-                                <div class="col-2">
-                                    {{ $menber->player_number }}人目：{{ $menber->player }}
-                                </div>
-                            @endif
-                        @endif
-
-                    @endforeach
-                </div>
-            </div>
-            <div class="col-6"></div> --}}
-
-
     </div>
-    </div>
+    <script src="{{ asset('/js/game.js') }}"></script>
+
+
 </body>
 
 </html>

@@ -1,7 +1,3 @@
-{{-- @extends('layouts.fighter')
-
-@section('content') --}}
-
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -41,14 +37,11 @@
                                 最後にチェックボックスのチェックを入れて「ログインしてゲームを始める」を押してください。</p>
                             <p> また、初めての方は、「新規登録をする」のボタンをクリックして、必要事項を記入してください
                                 ※　ログインが完了しましたら、再度トップページに戻ります</p>
-
-
                         </div>
 
                         <div class="card-body">
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
-
                                 <div class="form-group row mt-3">
                                     <label for="email"
                                         class="col-md-4 col-form-label text-md-right">{{ __('●　メールアドレス') }}</label>
@@ -139,5 +132,3 @@
 </body>
 
 </html>
-
-{{-- @endsection --}}

@@ -28,6 +28,7 @@ class PlayersController extends Controller
 
     public function enter(Request $request)
     {
+
         /**if = computer設定
          * else = デーモンがプレーヤ設定
          */
@@ -59,7 +60,14 @@ class PlayersController extends Controller
         DB::table('players')->insert($param);
        }
 
+       if(isset($computer)){
+           $demon_name = $computer;
+       }else{
         $demon_name = DB::table('players')->where('user_id', '=', Auth::user()->id)->where('chara', '=', '1')->first('player');
+       }
+       
+
+
         $players = DB::table('players')->where('user_id', '=', Auth::user()->id)->orderBy('player_number', 'asc')->get();
 
         session()->put('demon_name',$demon_name);
