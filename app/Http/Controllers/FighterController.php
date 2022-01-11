@@ -24,9 +24,7 @@ class FighterController extends Controller
         //        return back()->withinput();
         //     }
         // }
-      
-      
-      
+          
 
 
         // ドボンかセーフか判定する。
@@ -109,7 +107,6 @@ class FighterController extends Controller
         $fighter_word_all = session()->get('fighter_word_all');
         $turn = session()->get('turn');
 
-        // dd( $before_word );
         return view('games.game', [
             'next_fighter' => $next_fighter,
             'before_word' => $before_word,

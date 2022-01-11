@@ -38,7 +38,7 @@
                         <div class="card-header">
                             <h4 style="text-align: center">---　ログインをしてゲームを始めよう　---</h4>
                             <p>ご登録していただいているメールアドレスとパスワードを入力し
-                                最後にチェックボックスのチェックを入れて「ログイン」を押してください。</p>
+                                最後にチェックボックスのチェックを入れて「ログインしてゲームを始める」を押してください。</p>
                             <p> また、初めての方は、「新規登録をする」のボタンをクリックして、必要事項を記入してください
                                 ※　ログインが完了しましたら、再度トップページに戻ります</p>
 
@@ -99,7 +99,7 @@
                                 <div class="form-group row mt-3 mb-0">
                                     <div class="col-md-8 offset-md-4">
                                         <button type="submit" class="btn btn-primary">
-                                            {{ __('ログイン') }}
+                                            {{ __('ログインしてゲームを始める') }}
                                         </button>
                                         @if (Route::has('password.request'))
                                             <a class="btn btn-link" href="{{ route('password.request') }}"
@@ -112,11 +112,13 @@
 
                             </form>
                             <div class="row mt-5">
-                                <div class="box mt-3" style="background: rgb(222, 233, 238);">
+                                <div style="background: rgb(222, 233, 238); padding:5% 5% 5% 5%;">
                                     <form action="{{ route('register') }}" method="get">
                                         <h4 style="text-align: center">---【新規登録】---</h4>
                                         <p>初めての方は下の「新規登録」をクリックしてください</p>
-                                        <p><input type="submit" value="新規登録をする" class="btn btn-danger"></p>
+                                        <div class="col-4 offset-8">
+                                            <input type="submit" value="新規登録をする"  class="btn btn-danger w-100">
+                                        </div>
                                     </form>
                                 </div>
                             </div>

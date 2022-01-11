@@ -37,7 +37,9 @@
             </div>
             <div class="col-6">
                 <div class="card">
-                    <div class="card-header">新規登録</div>
+                    <div class="card-header">
+                        <h4>--新規登録--</h4>
+                    <p>お名前・メールアドレス・パスワードを入力し、最後に登録を押してください</p></div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('register') }}">
                             @csrf
