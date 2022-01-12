@@ -48,9 +48,23 @@
                  
                     <div class="row mt-3">
                         <p><input type="radio" name="chara" value="0" title="プレーヤがデーモンになって悪魔の言葉を作成します">コンピューター</p>
-                        {{-- <input type="text" name="player" value="computer"> --}}
+                       
+                    </div>
+              
+
+                <h4 style="margin-top: 3rem;">このゲームのターン数を入力してください。</h4>
+                <p>ターンの数だけファイターの一人が解答する数が決まります</p>
+                    <select name="turn">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <div class = "row mt-5">
                         <input type="submit" value="次へ" style="width:100px;" onclick="return check()">
                     </div>
+                  
                 </form>
             </div>
 

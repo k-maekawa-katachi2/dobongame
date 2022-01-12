@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>判定結果</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <style>
+    <link rel="stylesheet" href="{{ asset('css/game.css') }}">
+    {{-- <style>
         .container {
             border: solid;
             border-color: #031de2;
@@ -42,12 +43,9 @@
             }
         }
 
-        .kana_font {
-            font-size: 30px;
-            color: red;
-        }
+   
 
-    </style>
+    </style> --}}
 </head>
 
 <body>
@@ -87,18 +85,18 @@
                     </div>
                     <div class="row justify-content-start mt-3">
                     @else
-                    @if ($allWord->judge == 'doboon')
-                    <div class="col-4 alert alert-danger" role="alert">
-                        {{ $allWord->player }}：<br>
-                        {{ $allWord->fighter_word }}
-                    </div>
-                @else
-                    <div class="col-4">
-                        {{ $allWord->player }}：<br>
-                        {{ $allWord->fighter_word }}
-                    </div>
-                @endif
-                       
+                        @if ($allWord->judge == 'doboon')
+                            <div class="col-4 alert alert-danger" role="alert">
+                                {{ $allWord->player }}：<br>
+                                {{ $allWord->fighter_word }}
+                            </div>
+                        @else
+                            <div class="col-4">
+                                {{ $allWord->player }}：<br>
+                                {{ $allWord->fighter_word }}
+                            </div>
+                        @endif
+
                 @endif
 
                 @endforeach
@@ -146,9 +144,11 @@
             <div class="last mt-5">
                 <h1 style="text-align: center;">{{ $doboon }}</h1>
             </div>
-            <form action="players" method="get">
-                <input type="submit" value="もう一度ゲームする">
-            </form>
+            <div class="result">
+                <form action="players" method="get">
+                    <input type="submit" value="もう一度ゲームする">
+                </form>
+            </div>
         </div>
 
 

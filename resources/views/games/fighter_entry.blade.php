@@ -56,10 +56,10 @@
                     <h4 style="margin-bottom:3rem;">{{ $next }}人目、ファイターの名前を入力してください</h4>
                     <input type="hidden" name="chara" value="2">
                     <input type="hidden" name="player_number" value="{{ $next }}">
+                    {{-- エラー表示　ここから --}}
                     <p><strong id="err_name" style="color:red;"></strong></p>
+                    {{-- ここまで --}}
                     <input type="text" name="player">
-
-                   
                     <div class="row mt-3">
                         ファイターの人数を追加するときは「追加」ボタンを、全てのエントリー者の入力が終わったら「決定」を押してください
                     </div>
@@ -69,7 +69,11 @@
 
                 <form action="demmon_words" method="get">
                     <br>
+                    @isset($chara_id)
+                    <input type="submit" value="ゲームスタート">
+                  @else
                     <input type="submit" value="決定">
+                    @endisset
                 </form>
 
                 <div class="row justify-content-start mt-5">

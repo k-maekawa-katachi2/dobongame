@@ -3,6 +3,8 @@
  * 　デーモンの選択。プレーヤの選択時に名前の入力する枠が出現される
  */
 
+// const { first } = require("lodash");
+
 // 最初は名前の入力枠を見えない形にする
 document.getElementById("hidden_chara").style.display = "none";
 
@@ -37,4 +39,16 @@ function check() {
     else {
         return true;
     }
+}
+
+
+function word(){
+
+    if(word_form.word.value ==""){
+        console.log('入力をしてください');
+        return false;
+    }
+//     var first_word = fighter_word.value.slice(0,1);
+// console.log(first_word);
+// return false
 }

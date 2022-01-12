@@ -43,16 +43,7 @@
                     <p>２つめ：<input type="password" name="demon_word2" value="{{ old('demon_word2') }}"></p>
                     <p>３つめ：<input type="password" name="demon_word3" value="{{ old('demon_word3') }}"></p>
 
-                    <h4 style="margin-top: 3rem;">このゲームのターン数を入力してください。</h4>
-                    <p>ターンの数だけファイターの一人が解答する数が決まります</p>
-                        <select name="turn">
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                        </select>
-
+             
                         <input type="submit" value="ゲームスタート">
                 </form>
             </div>
