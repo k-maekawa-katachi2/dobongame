@@ -51,10 +51,9 @@ function check() {
 function word1() {
 
     const regex1 = /^[\u3041-\u3096ー]+$/;
-    // const regex1 = /^[\u3040-\u309F]+$/;
+
     var fighter_word1 = document.getElementById('fighter_word1').value;
     var last_letter = fighter_word1.slice(-1);
-    // var last_word = document.getElementById("last_word").value;
 
     if (word_form1.fighter_word.value == "") {
         document.getElementById("err_word1").innerText = "【エラー】：文字を入力してください";
@@ -69,17 +68,27 @@ function word1() {
         return true;
     }
 }
+
+
 function word2() {
+    const regex2 = /^[\u3041-\u3096ー]+$/;
+
     var fighter_word2 = document.getElementById('fighter_word2').value;
-    console.log(fighter_word2);
     var one_letter = fighter_word2.slice(0, 1);
+    var last_letter = fighter_word1.slice(-1);
     var last_word = document.getElementById("last_word").value;
 
     if (word_form2.fighter_word.value == "") {
         document.getElementById("err_word2").innerText = "【エラー】：文字を入力してください";
         return false;
+    } else if (last_letter == "ん") {
+        document.getElementById("err_word2").innerText = "【エラー】：「ん」で終わっています。やり直してください";
+        return false;
     } else if (one_letter != last_word) {
         document.getElementById("err_word2").innerText = "【エラー】：最後の文字とつながっていません。";
+        return false;
+    } else if (regex2.test(fighter_word2) == false) {
+        document.getElementById("err_word2").innerText = "【エラー】：ひらがなで入力してください";
         return false;
     } else {
         return true;

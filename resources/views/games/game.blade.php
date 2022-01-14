@@ -33,7 +33,8 @@
                         <div class="box3">
                             <p><input type="text" id="fighter_word1" name="fighter_word"></p>
                             <input type="hidden" name="player_id" value="{{ $first_player->id }}">
-                            <input type="hidden" name="order_count" value="{{ $first_player->player_number }}">
+                            <input type="hidden" name="player_number" value="{{ $first_player->player_number }}">
+                            <input type="hidden" name="order_count" value='1'>
                             <input type="hidden" name="turn_count" value="{{ $turn_count }}">
                             <input type="submit" value="次へ" onclick="return word1()">
                         </div>
@@ -63,7 +64,8 @@
                             <p>{{ $before_word->fighter_word }} ー＞<input type="text" id="fighter_word2"
                                     name="fighter_word"></p>
                             <input type="hidden" name="player_id" value="{{ $next_fighter->id }}">
-                            <input type="hidden" name="order_count" value="{{ $next_fighter->player_number }}">
+                            <input type="hidden" name="player_number" value="{{ $next_fighter->player_number }}">
+                            <input type="hidden" name="order_count" value="{{ $order_count }}">
                             <input type="hidden" name="turn_count" value="{{ $turn_count }}">
                             <input type="text" name="last_word" id="last_word" value="{{ $last_word }}">
 

@@ -81,11 +81,11 @@ class FighterController extends Controller
 
         DB::table('fighter_words')->insert($param);
 
-        
+
         // 次のファイターを情報を取り出す
-        $next_fighter = DB::table('players')->where('player_number', '>', $request->order_count)->first();
+        $next_fighter = DB::table('players')->where('player_number', '>', $request->player_number)->first();
 
-
+        $order_count = $request->order_count + 1;
 
         $turn = session()->get('turn');
         $turn_count = $request->turn_count;
@@ -107,33 +107,24 @@ class FighterController extends Controller
         }
 
 
-
-        $before_word = DB::table('fighter_words')->where('order_count', '=', $request->order_count)->orderBy('id', 'desc')->limit(1)->get('fighter_word');
-        //　↑　完成時にはorderBy('id','desc')をorderBy('order_count','desc')に変更すること、今は作成のためこのまま
-
+        $before_word = DB::table('fighter_words')->where('order_count', '=', $request->order_count)->orderBy('order_count', 'desc')->limit(1)->get('fighter_word');
+       
 
         $fighter_word_all = DB::table('fighter_words')->where('user_id', '=', Auth::user()->id)->get('fighter_word');
-        $session_last_word = session()->get('last_word');
 
+        session(['next_fighter' => $next_fighter]);
+        session(['before_word' => $before_word[0]]);
+        session(['fighter_word_all' => $fighter_word_all]);
+        session(['turn_count' => $turn_count]);
+        session(['order_count' => $order_count]);
 
         // プレーヤカウントが４または８の場合、一度デーモンの攻撃動画に移る
         if ($request->order_count == '4' || $request->order_count == '8') {
-            session(['next_fighter' => $next_fighter]);
-            session(['before_word' => $before_word[0]]);
-            session(['fighter_word_all' => $fighter_word_all]);
-            session(['turn_count' => $turn_count]);
-
             return view('games.demonAttack', [
                 'order_count' => $request->order_count
             ]);
         } else {
-            return view('games.game', [
-                'next_fighter' => $next_fighter,
-                'before_word' => $before_word[0],
-                'fighter_word_all' => $fighter_word_all,
-                'turn_count' => $turn_count,
-                'last_word' => $session_last_word
-            ]);
+            return redirect('fighters');
         }
     }
 
@@ -144,13 +135,15 @@ class FighterController extends Controller
         $fighter_word_all = session()->get('fighter_word_all');
         $turn_count = session()->get('turn_count');
         $session_last_word = session()->get('last_word');
+        $order_count = session()->get('order_count');
 
         return view('games.game', [
             'next_fighter' => $next_fighter,
             'before_word' => $before_word,
             'fighter_word_all' => $fighter_word_all,
             'turn_count' => $turn_count,
-            'last_word' => $session_last_word
+            'last_word' => $session_last_word,
+            'order_count' => $order_count
         ]);
     }
 }
