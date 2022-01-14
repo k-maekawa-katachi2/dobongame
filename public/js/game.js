@@ -23,7 +23,7 @@ function myfunc() {
 
 
 /**
- *  -- エラーチェック --
+ *  -- エラーチェック （プレーヤエントリ時）--
  *  ⓵　if     :ラジオボタンにチェックがない場合のエラー
  *  ⓶　else if:名前の入力欄が未記入の場合にエラー
  *  ⓷　else   :問題なし、trueで動作を実行する
@@ -42,13 +42,46 @@ function check() {
 }
 
 
-function word(){
+/**
+ * -- エラーチェック （しりとり入力時）--
+ */
 
-    if(word_form.word.value ==""){
-        console.log('入力をしてください');
+
+
+function word1() {
+
+    const regex1 = /^[\u3041-\u3096ー]+$/;
+    // const regex1 = /^[\u3040-\u309F]+$/;
+    var fighter_word1 = document.getElementById('fighter_word1').value;
+    var last_letter = fighter_word1.slice(-1);
+    // var last_word = document.getElementById("last_word").value;
+
+    if (word_form1.fighter_word.value == "") {
+        document.getElementById("err_word1").innerText = "【エラー】：文字を入力してください";
         return false;
+    } else if (last_letter == "ん") {
+        document.getElementById("err_word1").innerText = "【エラー】：「ん」で終わっています。やり直してください";
+        return false;
+    } else if (regex1.test(fighter_word1) == false) {
+        document.getElementById("err_word1").innerText = "【エラー】：ひらがなで入力してください";
+        return false;
+    } else {
+        return true;
     }
-//     var first_word = fighter_word.value.slice(0,1);
-// console.log(first_word);
-// return false
+}
+function word2() {
+    var fighter_word2 = document.getElementById('fighter_word2').value;
+    console.log(fighter_word2);
+    var one_letter = fighter_word2.slice(0, 1);
+    var last_word = document.getElementById("last_word").value;
+
+    if (word_form2.fighter_word.value == "") {
+        document.getElementById("err_word2").innerText = "【エラー】：文字を入力してください";
+        return false;
+    } else if (one_letter != last_word) {
+        document.getElementById("err_word2").innerText = "【エラー】：最後の文字とつながっていません。";
+        return false;
+    } else {
+        return true;
+    }
 }

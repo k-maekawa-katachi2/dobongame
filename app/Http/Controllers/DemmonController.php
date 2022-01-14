@@ -164,7 +164,7 @@ session(['first_player' => $first_player]);
     private function testCheck($return_all)
     {
         $return = [];
-        if ($return_all < '11' || $return_all > '83' || $return_all == null) {
+        if ($return_all < '11' || $return_all > '89' || $return_all == null) {
             $return = array(
                 'msg' => 'デーモンの言葉は11から83の間で半角で入れてください',
                 'demon_name' => session()->get('demon_name'),

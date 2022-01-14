@@ -12,23 +12,6 @@ class FighterController extends Controller
 
     public function index(Request $request)
     {
-        // エラーの作成中
-
-       
-
-        //  $first_word = mb_substr($request->fighter_word,0,1);
-        // // dd( $session_last_word);
-
-         // エラーチェック
-        if (isset($session_last_word)) {
-            $first_word = mb_substr($request->fighter_word, 0, 1);
-            if ($first_word !== $session_last_word) {
-                $msg = '言葉がしりとりとしてつながっていません。文字を入力しなおしてください';
-                return view('games.game');
-            }
-        }
-
-
 
         // ドボンかセーフか判定する。
         // ⓵　セッションでデーモンの言葉を呼び出す
@@ -38,21 +21,52 @@ class FighterController extends Controller
 
 
         // ⓶　ファイターの言葉の最後の文字を取得する
-        $last_word = mb_substr($request->fighter_word, -1);
+        $check_word = mb_substr($request->fighter_word, -1);
         // 単語の語尾が伸ばす文字「ー」で終わったいるときは「ー」のひとつ前の文字を使う
-        if ($last_word == "ー") {
-            $last_word = mb_substr($request->fighter_word, -2, 1);
+        if ($check_word == "ー") {
+            $check_word = mb_substr($request->fighter_word, -2, 1);
         }
-        // dd($last_word);
 
-        session()->put('last_word', $last_word);
 
         // ⓷　デーモンの言葉と一致＝ドボン、　一致しない＝セーフ
-        if ($last_word == $kana1->hiragana || $last_word == $kana2->hiragana || $last_word == $kana3->hiragana) {
+        if ($check_word == $kana1->hiragana || $check_word == $kana2->hiragana || $check_word == $kana3->hiragana) {
             $judge = 'doboon';
         } else {
             $judge = 'safe';
         }
+
+        /**　
+         * 　最後の文字をデータで保存する。ただし、小文字の場合は大文字に変換する
+         * 　　●　if,elseif : 正規表現にて文字変換および処置
+         *   　●　else      : 小文字に該当しない文字の処置
+         */
+
+        // 正規表現
+        if ($check_word == "ぁ") {
+            $last_word = str_replace("ぁ", "あ", $check_word);
+        } elseif ($check_word == "ぃ") {
+            $last_word = str_replace("ぃ", "い", $check_word);
+        } elseif ($check_word == "ぅ") {
+            $last_word = str_replace("ぅ", "う", $check_word);
+        } elseif ($check_word == "ぇ") {
+            $last_word = str_replace("ぇ", "え", $check_word);
+        } elseif ($check_word == "ぉ") {
+            $last_word = str_replace("ぉ", "お", $check_word);
+        } elseif ($check_word == "ゃ") {
+            $last_word = str_replace("ゃ", "や", $check_word);
+        } elseif ($check_word == "ゅ") {
+            $last_word = str_replace("ゅ", "ゆ", $check_word);
+        } elseif ($check_word == "ょ") {
+            $last_word = str_replace("ょ", "よ", $check_word);
+        } elseif ($check_word == "っ") {
+            $last_word = str_replace("っ", "つ", $check_word);
+        } else {
+            $last_word = $check_word;
+        }
+
+        //セッションに保存する    
+        session()->put('last_word', $last_word);
+
 
 
         // 記録を入力する
@@ -67,6 +81,7 @@ class FighterController extends Controller
 
         DB::table('fighter_words')->insert($param);
 
+        
         // 次のファイターを情報を取り出す
         $next_fighter = DB::table('players')->where('player_number', '>', $request->order_count)->first();
 
@@ -93,7 +108,7 @@ class FighterController extends Controller
 
 
 
-        $before_word = DB::table('fighter_words')->where('order_count', '=', $request->order_count)->orderBy('id','desc')->limit(1)->get('fighter_word');
+        $before_word = DB::table('fighter_words')->where('order_count', '=', $request->order_count)->orderBy('id', 'desc')->limit(1)->get('fighter_word');
         //　↑　完成時にはorderBy('id','desc')をorderBy('order_count','desc')に変更すること、今は作成のためこのまま
 
 
@@ -108,16 +123,16 @@ class FighterController extends Controller
             session(['fighter_word_all' => $fighter_word_all]);
             session(['turn_count' => $turn_count]);
 
-            return view('games.demonAttack',[
-                    'order_count' => $request->order_count
-                ]);
+            return view('games.demonAttack', [
+                'order_count' => $request->order_count
+            ]);
         } else {
             return view('games.game', [
                 'next_fighter' => $next_fighter,
                 'before_word' => $before_word[0],
                 'fighter_word_all' => $fighter_word_all,
                 'turn_count' => $turn_count,
-                'last_word'=> $session_last_word
+                'last_word' => $session_last_word
             ]);
         }
     }

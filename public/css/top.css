@@ -1,5 +1,6 @@
 body {
 background-image: url(../images/dobonTop.png);  
+background-repeat: no-repeat;
 background-size: cover;
 overflow-y:hidden;
 }
