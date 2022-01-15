@@ -9,7 +9,7 @@
 
 __【動作環境】__
 <br>
-    PHP 7.4、Laravel 8、mysql(phpmyadmin)5.1.1で動作確認しています。
+   PHP 7.4、Laravel 8、MySQL(10.4.22-MariaDB)で動作確認しています。
 <br>
     データベースのテーブル作成はlaravelのマイグレーションにて実行しています。
 

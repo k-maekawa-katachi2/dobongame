@@ -13,7 +13,10 @@ class FighterController extends Controller
     public function index(Request $request)
     {
 
-        // ドボンかセーフか判定する。
+        /**
+         * ドボンかセーフか判定する。
+         * 
+         */ 
         // ⓵　セッションでデーモンの言葉を呼び出す
         $kana1 = session()->get('demon_kana1');
         $kana2 = session()->get('demon_kana2');

@@ -147,6 +147,8 @@ class DemmonController extends Controller
         return redirect('start');
     }
 
+
+    
     public function gameStart()
     {
         // ターンとファーストプレーヤの情報をsessionから呼び出す
