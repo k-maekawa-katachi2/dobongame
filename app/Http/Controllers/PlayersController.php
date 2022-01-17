@@ -76,7 +76,6 @@ class PlayersController extends Controller
         session()->put('turn', $request->turn);
         };
         
-        $turn = session()->get('turn');
 
         $players = DB::table('players')->where('user_id', '=', Auth::user()->id)->orderBy('player_number', 'asc')->get();
         $number = DB::table('players')->where('user_id', '=', Auth::user()->id)->orderBy('player_number', 'desc')->first('player_number');

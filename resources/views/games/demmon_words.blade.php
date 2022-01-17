@@ -34,11 +34,12 @@
                     <h4>デーモン：{{($demon_name->player)}}様、ドボーンの言葉（ひらがな１文字）を３つ登録してください</h4>
                     <p>各枠に異なる言葉（ひらがな１文字）を入れてください</p>
                     <p>該当するひらがなの番号を記入してください</p>
-                    @isset($msg)
-                    <div class="alert alert-danger" role="alert">
-                        {{$msg}}
-                      </div>
-@endisset
+                  @isset($msg)
+                  <div class="alert alert-danger" role="alert">
+                    {{$msg}}
+                  </div>
+                  @endisset
+                
                     <p>１つめ：<input type="password" name="demon_word1" value="{{ old('demon_word1') }}"></p>
                     <p>２つめ：<input type="password" name="demon_word2" value="{{ old('demon_word2') }}"></p>
                     <p>３つめ：<input type="password" name="demon_word3" value="{{ old('demon_word3') }}"></p>
