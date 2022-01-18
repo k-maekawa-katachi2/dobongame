@@ -1,4 +1,4 @@
-## 【ポートフォリオ名】　: dobongame epsode2  ～final judge 最後に笑うのは・・～
+## 【ポートフォリオ名】　: dobongame epsode2  ～final judge 最後に笑うのはどっちだ・・～
 
 <br>
 <br>
