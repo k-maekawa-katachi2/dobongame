@@ -29,7 +29,7 @@ overflow-y:hidden;
   cursor: pointer;
 }
 
-button:active {
+.button:active {
   -webkit-transform: translate(0,2px);
   -moz-transform: translate(0,2px);
   transform: translate(0,2px);

@@ -3,8 +3,6 @@
  * 　デーモンの選択。プレーヤの選択時に名前の入力する枠が出現される
  */
 
-// const { first } = require("lodash");
-
 // 最初は名前の入力枠を見えない形にする
 document.getElementById("hidden_chara").style.display = "none";
 
@@ -47,11 +45,9 @@ function check() {
  */
 
 
-
 function word1() {
 
     const regex1 = /^[\u3041-\u3096ー]+$/;
-
     var fighter_word1 = document.getElementById('fighter_word1').value;
     var last_letter = fighter_word1.slice(-1);
 
@@ -75,9 +71,10 @@ function word2() {
 
     var fighter_word2 = document.getElementById('fighter_word2').value;
     var one_letter = fighter_word2.slice(0, 1);
-    var last_letter = fighter_word1.slice(-1);
+    var last_letter = fighter_word2.slice(-1);
     var last_word = document.getElementById("last_word").value;
 
+ 
     if (word_form2.fighter_word.value == "") {
         document.getElementById("err_word2").innerText = "【エラー】：文字を入力してください";
         return false;
@@ -94,3 +91,29 @@ function word2() {
         return true;
     }
 }
+
+// function word() {
+//     const regex2 = /^[\u3041-\u3096ー]+$/;
+
+//     var check_word = document.getElementById('fighter_word').value;
+//     var one_letter = check_word.slice(0, 1);
+//     var last_letter = check_word.slice(-1);
+//     var last_word = document.getElementById("last_word").value;
+
+ 
+//     if (word_form2.fighter_word.value == "") {
+//         document.getElementById("err_word").innerText = "【エラー】：文字を入力してください";
+//         return false;
+//     } else if (last_letter == "ん") {
+//         document.getElementById("err_word").innerText = "【エラー】：「ん」で終わっています。やり直してください";
+//         return false;
+//     } else if (one_letter != last_word) {
+//         document.getElementById("err_word").innerText = "【エラー】：最後の文字とつながっていません。";
+//         return false;
+//     } else if (regex2.test(check_word) == false) {
+//         document.getElementById("err_word").innerText = "【エラー】：ひらがなで入力してください";
+//         return false;
+//     } else {
+//         return true;
+//     }
+// }

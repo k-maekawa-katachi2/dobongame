@@ -8,47 +8,12 @@
     <title>ドボーンしりとり</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-    <style>
-        .container {
-            border: solid;
-            border-color: #031de2;
-            border-radius: 8px;
-            width: 100%;
-            height: auto;
-            margin-top: 3rem;
-            padding: 5rem 10px 30px 5rem;
-            /* 半径が8pxの角丸 */
-        }
-
-
-        /* .fadeDown {
-            animation-name: fadeDownAnime;
-            animation-duration: 1.5s;
-            animation-fill-mode: forwards;
-            opacity: 0;
-
-        }
-
-        @keyframes fadeDownAnime {
-            from {
-                opacity: 0;
-                transform: translateY(-150px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        } */
-
-    </style>
+    <link rel="stylesheet" href="{{ asset('css/game.css') }}">
 </head>
 
 <body>
-    <div class="container fadeDown">
+    <div class="container">
         <div class="row">
-
             <div class="col-6">
                 <form action="players" method="post" name="player_form">
                     @csrf
@@ -70,9 +35,9 @@
                 <form action="demmon_words" method="get">
                     <br>
                     @isset($chara_id)
-                    <input type="submit" value="ゲームスタート">
-                  @else
-                    <input type="submit" value="決定">
+                        <input type="submit" value="ゲームスタート">
+                    @else
+                        <input type="submit" value="決定">
                     @endisset
                 </form>
 
@@ -89,9 +54,8 @@
                     <div class="col-3">
                         {{ $menber->player_number }}人目：{{ $menber->player }}
                     </div>
-                    @endif
-                    @endif
-
+                            @endif
+                        @endif
                     @endforeach
                 </div>
             </div>
@@ -102,8 +66,6 @@
         </div>
     </div>
     <script src="{{ asset('/js/game.js') }}"></script>
-
-
 </body>
 
 </html>

@@ -20,15 +20,12 @@
 </head>
 
 <body>
-    {{-- <video autoplay src="movies/demonplay.mp4"></video> --}}
     <div class="container">
         <video controls autoplay muted="false">
-            {{-- <video controls loop autoplay muted width="500px" height="300px"> --}}
             <source src="{{ asset('movies/Loading.mp4') }}" type="video/mp4">
         </video>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script>
     setTimeout(function(){
         window.location.href = 'result';

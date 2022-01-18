@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('players', 'PlayersController@index')->middleware('auth');;
 Route::post('players', 'PlayersController@enter');
 
-
 Route::post('result', function () {return view('games.loading');});
 Route::get('result', 'ResultController@index')->middleware('auth');;
 
@@ -30,9 +29,8 @@ Route::post('demmon_words', 'DemmonController@enter');
 Route::get('start', function () {return view('games.gameStart');})->middleware('auth');;
 Route::get('gameStart', 'DemmonController@gameStart')->middleware('auth');;
 
-Route::post('player/check', 'PlayersController@check');
-Route::post('players/last', 'PlayersController@last');
-
+// Route::post('player/check', 'PlayersController@check');
+// Route::post('players/last', 'PlayersController@last');
 
 
 Route::get('/', function () {return view('welcome');});
