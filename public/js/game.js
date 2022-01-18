@@ -44,7 +44,6 @@ function check() {
  * -- エラーチェック （しりとり入力時）--
  */
 
-
 function word1() {
 
     const regex1 = /^[\u3041-\u3096ー]+$/;

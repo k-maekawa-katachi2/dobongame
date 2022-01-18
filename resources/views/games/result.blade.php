@@ -97,7 +97,7 @@
                 <h1 style="text-align: center;">{{ $doboon }}</h1>
             </div>
             <div class="result">
-                <form action="players" method="get">
+                <form action="{{route('welcome')}}" method="get">
                     <input type="submit" value="もう一度ゲームする">
                 </form>
             </div>

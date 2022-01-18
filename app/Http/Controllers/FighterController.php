@@ -8,15 +8,29 @@ use Illuminate\Support\Facades\DB;
 
 class FighterController extends Controller
 {
-    //
+    /**
+     *  ファイターが入力した文字をジャッジする
+     * 
+     *  @param string $kana1,$kana2,$kana3 : demon_kanaのセッション情報
+     *  @param string $check_word : ファイターの入力した最後の文字（または２つ前の文字）
+     *  @param bool $judge : デーモンの言葉と一致したらfalse('doboon')、一致しなかったらtrue('safe')
+     *  @param string $last_word : ファイターの最後の単語　＝　次のファイターがしりとりに使う最初の言葉
+     *  @param array $param : テーブル('fighter_words)に登録するデータ
+     *  @param array $next_fighter : 次のファイターの情報
+     *  @param int $order_count : 次のファイターで表示するカウント
+     *  @param int $turn : 最初に設定したターンの回数
+     *  @param int $turn_count : 現在のターンの回数
+     *  @param array $fighter_word_all : ファイターが入力した情報の一覧
+     *  @param string $before_word : ひとつ前のファイターが入力した言葉
+     * 
+     */
 
     public function index(Request $request)
     {
 
         /**
          * ドボンかセーフか判定する。
-         * 
-         */ 
+         */
         // ⓵　セッションでデーモンの言葉を呼び出す
         $kana1 = session()->get('demon_kana1');
         $kana2 = session()->get('demon_kana2');
@@ -70,8 +84,6 @@ class FighterController extends Controller
         //セッションに保存する    
         session()->put('last_word', $last_word);
 
-
-
         // 記録を入力する
         $param = [
             "turn" =>  $request->turn_count,
@@ -84,12 +96,11 @@ class FighterController extends Controller
 
         DB::table('fighter_words')->insert($param);
 
-
         // 次のファイターを情報を取り出す
         $next_fighter = DB::table('players')->where('player_number', '>', $request->player_number)->first();
-
         $order_count = $request->order_count + 1;
 
+        // 設定したターンの数を呼び出す
         $turn = session()->get('turn');
         $turn_count = $request->turn_count;
 
@@ -110,11 +121,12 @@ class FighterController extends Controller
         }
 
 
+        // ひとつ前の単語を抽出する
         $before_word = DB::table('fighter_words')->where('order_count', '=', $request->order_count)->orderBy('order_count', 'desc')->limit(1)->get('fighter_word');
-       
-
+        // 今までに入力したファイターの情報を抽出する
         $fighter_word_all = DB::table('fighter_words')->where('user_id', '=', Auth::user()->id)->get('fighter_word');
 
+        // ムービーの後にも使うため、sessionで保存する
         session(['next_fighter' => $next_fighter]);
         session(['before_word' => $before_word[0]]);
         session(['fighter_word_all' => $fighter_word_all]);
@@ -131,13 +143,25 @@ class FighterController extends Controller
         }
     }
 
+
+    /**
+     * ムービーを見た後の処理（再読み込みの時も仕様）
+     * 
+     * @param array $next_fighter : 次のファイターの情報
+     * @param string $before_word : ひとつ前のファイターが入力した言葉
+     * @param array $fighter_word_all : ファイターが入力した情報の一覧
+     * @param int $turn_count : 現在のターンの回数
+     * @param string $last_word : ファイターの最後の単語　＝　次のファイターがしりとりに使う最初の言葉
+     * @param int $order_count : 次のファイターで表示するカウント
+     * 
+     */
     public function afterMovie()
     {
         $next_fighter = session()->get('next_fighter');
         $before_word = session()->get('before_word');
         $fighter_word_all = session()->get('fighter_word_all');
         $turn_count = session()->get('turn_count');
-        $session_last_word = session()->get('last_word');
+        $last_word = session()->get('last_word');
         $order_count = session()->get('order_count');
 
         return view('games.game', [
@@ -145,7 +169,7 @@ class FighterController extends Controller
             'before_word' => $before_word,
             'fighter_word_all' => $fighter_word_all,
             'turn_count' => $turn_count,
-            'last_word' => $session_last_word,
+            'last_word' => $last_word,
             'order_count' => $order_count
         ]);
     }

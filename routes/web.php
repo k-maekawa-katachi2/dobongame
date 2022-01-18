@@ -33,7 +33,7 @@ Route::get('gameStart', 'DemmonController@gameStart')->middleware('auth');;
 // Route::post('players/last', 'PlayersController@last');
 
 
-Route::get('/', function () {return view('welcome');});
+Route::get('/', function () {return view('welcome');})->name('welcome');
 
 Auth::routes();
 

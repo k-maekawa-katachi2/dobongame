@@ -8,7 +8,11 @@ use Illuminate\Support\Facades\DB;
 
 class PlayersController extends Controller
 {
-    // 
+    /**
+     * playersのページを表示する
+     * （この時に今まで登録した履歴を全て消去する）
+     * @param int $user_id: ログインユーザーのID
+     */
 
     public function index(Request $request)
     {
@@ -25,6 +29,19 @@ class PlayersController extends Controller
         return view('games.players');
     }
 
+
+    /**
+     *  プレーヤの設定・登録
+     * 
+     *  @param array $param: データベース(players)に入力するデータ
+     *  @param bool $play_number_check: 同じ情報が存在するかチェックする
+     *  @param int  $chara_id: デーモンがコンピュータの時のid
+     *  @param string  $demon_name: デーモンの名前（conputerかプレーヤの名前）
+     *  @param array  $players: データベース(players)に登録されたデータ
+     *  @param int  $number: データベース(players)に登録されたデータにてplayer_numberの数字が一番大きいもの
+     *  @param int  $next: $numberに+1した数字
+     * 
+     */
     public function enter(Request $request)
     {
 
@@ -62,20 +79,18 @@ class PlayersController extends Controller
 
         //    デーモンの種類の決定とデーモンのデータおよびターン数をセッションで保存
         $chara_id = session()->get('chara_id');
-
         if ($chara_id == '0') {
             $demon_name = 'computer';
         } else {
             $demon_name = DB::table('players')->where('user_id', '=', Auth::user()->id)->where('chara', '=', '1')->first('player');
         }
 
+        // demon_nameを保存
         session()->put('demon_name', $demon_name);
-       
-        
-        if($request->turn != null){
-        session()->put('turn', $request->turn);
+        // ターンを保存（この式がないと、ファイター選択時に$turnがnullになってしまう
+        if ($request->turn != null) {
+            session()->put('turn', $request->turn);
         };
-        
 
         $players = DB::table('players')->where('user_id', '=', Auth::user()->id)->orderBy('player_number', 'asc')->get();
         $number = DB::table('players')->where('user_id', '=', Auth::user()->id)->orderBy('player_number', 'desc')->first('player_number');
