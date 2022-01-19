@@ -52,36 +52,8 @@ class FighterController extends Controller
             $judge = 'safe';
         }
 
-        /**　
-         * 　最後の文字をデータで保存する。ただし、小文字の場合は大文字に変換する
-         * 　　●　if,elseif : 正規表現にて文字変換および処置
-         *   　●　else      : 小文字に該当しない文字の処置
-         */
-
-        // 正規表現
-        if ($check_word == "ぁ") {
-            $last_word = str_replace("ぁ", "あ", $check_word);
-        } elseif ($check_word == "ぃ") {
-            $last_word = str_replace("ぃ", "い", $check_word);
-        } elseif ($check_word == "ぅ") {
-            $last_word = str_replace("ぅ", "う", $check_word);
-        } elseif ($check_word == "ぇ") {
-            $last_word = str_replace("ぇ", "え", $check_word);
-        } elseif ($check_word == "ぉ") {
-            $last_word = str_replace("ぉ", "お", $check_word);
-        } elseif ($check_word == "ゃ") {
-            $last_word = str_replace("ゃ", "や", $check_word);
-        } elseif ($check_word == "ゅ") {
-            $last_word = str_replace("ゅ", "ゆ", $check_word);
-        } elseif ($check_word == "ょ") {
-            $last_word = str_replace("ょ", "よ", $check_word);
-        } elseif ($check_word == "っ") {
-            $last_word = str_replace("っ", "つ", $check_word);
-        } else {
-            $last_word = $check_word;
-        }
-
-        //セッションに保存する    
+        // セッションに保存する、ただし、小文字を大文字に変換する
+        $last_word = $this->checkWord($check_word);
         session()->put('last_word', $last_word);
 
         // 記録を入力する
@@ -93,8 +65,8 @@ class FighterController extends Controller
             "user_id" => Auth::user()->id,
             "judge" => $judge
         ];
-
         DB::table('fighter_words')->insert($param);
+
 
         // 次のファイターを情報を取り出す
         $next_fighter = DB::table('players')->where('player_number', '>', $request->player_number)->first();
@@ -172,5 +144,39 @@ class FighterController extends Controller
             'last_word' => $last_word,
             'order_count' => $order_count
         ]);
+    }
+
+    /**　
+     * 　 最後の文字をデータで保存する。ただし、小文字の場合は正規表現を使って大文字に変換する
+     *  @param string $check_word: しりとりの最後の文字
+     *  @param string $last_word: 次の人に渡す文字（次の人のしりとりの最初の文字）
+     * 　　●　if,elseif : 正規表現にて文字変換および処置
+     *   　●　else      : 小文字に該当しない文字の処置
+     */
+    private function checkWord($check_word)
+    {
+        // 正規表現
+        if ($check_word == "ぁ") {
+            $last_word = str_replace("ぁ", "あ", $check_word);
+        } elseif ($check_word == "ぃ") {
+            $last_word = str_replace("ぃ", "い", $check_word);
+        } elseif ($check_word == "ぅ") {
+            $last_word = str_replace("ぅ", "う", $check_word);
+        } elseif ($check_word == "ぇ") {
+            $last_word = str_replace("ぇ", "え", $check_word);
+        } elseif ($check_word == "ぉ") {
+            $last_word = str_replace("ぉ", "お", $check_word);
+        } elseif ($check_word == "ゃ") {
+            $last_word = str_replace("ゃ", "や", $check_word);
+        } elseif ($check_word == "ゅ") {
+            $last_word = str_replace("ゅ", "ゆ", $check_word);
+        } elseif ($check_word == "ょ") {
+            $last_word = str_replace("ょ", "よ", $check_word);
+        } elseif ($check_word == "っ") {
+            $last_word = str_replace("っ", "つ", $check_word);
+        } else {
+            $last_word = $check_word;
+        }
+        return $last_word;
     }
 }

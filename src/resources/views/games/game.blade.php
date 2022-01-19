@@ -27,12 +27,12 @@
                         <p class="box2">言葉はひらがなで入力してください。</p>
                         <p class="box2" style="color:blue;">＊　伸ばす棒「ー」で終わる場合、最後の言葉は棒の一つ手前の文字で判定します。<br>
                             （メーカー　→　この場合「か」で始める）</p>
-                            {{-- <div class="err_word" style=color:red;> --}}
+                            {{-- <div id="err_word" style=color:red;> --}}
                             <div id="err_word1" style=color:red;>
                                 {{-- 入力エラー時には、ここにエラーメッセージが表示 --}}
                             </div>
                         <div class="box3">
-                            {{-- <p><input type="text" class="fighter_word" name="fighter_word"></p> --}}
+                            {{-- <p><input type="text" id="fighter_word" name="fighter_word"></p> --}}
                             <p><input type="text" id="fighter_word1" name="fighter_word"></p>
                             <input type="hidden" name="player_id" value="{{ $first_player->id }}">
                             <input type="hidden" name="player_number" value="{{ $first_player->player_number }}">
