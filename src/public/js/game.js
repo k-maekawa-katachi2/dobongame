@@ -65,7 +65,7 @@ function check() {
  */
 
 function wordError(word_form, err_word, fighter_wordA) {
-    const regex = /^[\u3041-\u3096ー]+$/;
+    const regex = /^[\u3041-\u3096ー]+$/; // ひらがな（小文字含む）をマッチ
     var last_letter = fighter_wordA.slice(-1);
 
     if (word_form.fighter_word.value == "") {

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Rules\RadioCheck;
+
 
 class PlayersController extends Controller
 {
@@ -33,17 +35,16 @@ class PlayersController extends Controller
     /**
      *  プレーヤの設定・登録
      * 
-     *  @param array $param: データベース(players)に入力するデータ
-     *  @param bool $play_number_check: 同じ情報が存在するかチェックする
-     *  @param int  $chara_id: デーモンがコンピュータの時のid
-     *  @param string  $demon_name: デーモンの名前（conputerかプレーヤの名前）
-     *  @param array  $players: データベース(players)に登録されたデータ
-     *  @param int  $number: データベース(players)に登録されたデータにてplayer_numberの数字が一番大きいもの
-     *  @param int  $next: $numberに+1した数字
-     * 
      */
     public function enter(Request $request)
     {
+    //   dd($request->chara);
+        // バリデーション
+        $validatedData = $request->validate([
+            // "chara" => new RadioCheck,
+             'chara' => 'required'
+            // 'player' => 'required'
+        ]);
 
         /**if = computer設定
          * else = デーモンがプレーヤ設定

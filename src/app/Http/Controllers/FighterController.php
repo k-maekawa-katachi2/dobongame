@@ -5,28 +5,20 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Rules\FighterWord;
 
 class FighterController extends Controller
 {
     /**
      *  ファイターが入力した文字をジャッジする
-     * 
-     *  @param string $kana1,$kana2,$kana3 : demon_kanaのセッション情報
-     *  @param string $check_word : ファイターの入力した最後の文字（または２つ前の文字）
-     *  @param bool $judge : デーモンの言葉と一致したらfalse('doboon')、一致しなかったらtrue('safe')
-     *  @param string $last_word : ファイターの最後の単語　＝　次のファイターがしりとりに使う最初の言葉
-     *  @param array $param : テーブル('fighter_words)に登録するデータ
-     *  @param array $next_fighter : 次のファイターの情報
-     *  @param int $order_count : 次のファイターで表示するカウント
-     *  @param int $turn : 最初に設定したターンの回数
-     *  @param int $turn_count : 現在のターンの回数
-     *  @param array $fighter_word_all : ファイターが入力した情報の一覧
-     *  @param string $before_word : ひとつ前のファイターが入力した言葉
-     * 
      */
-
     public function index(Request $request)
     {
+
+        // バリデーション
+        $request->validate([
+            'fighter_word' => ['required', new FighterWord]
+        ]);
 
         /**
          * ドボンかセーフか判定する。

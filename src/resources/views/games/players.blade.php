@@ -32,7 +32,13 @@
                         <input type="hidden" name="player_number" value="0">
                     </div>
                     {{-- ここまで --}}
-
+   {{-- バリデーションチェック --}}
+   @if ($errors->any())
+   @foreach ($errors->all() as $error)
+       <strong style="color:red;">{{ $error }}</strong>
+   @endforeach
+@endif
+{{-- ここまで --}}
                     <div class="row mt-3">
                         <p><input type="radio" name="chara" value="0" title="プレーヤがデーモンになって悪魔の言葉を作成します">コンピューター</p>
                     </div>
@@ -58,7 +64,7 @@
                 </div>
             </div>
         </div>
-        <script src="{{ asset('/js/game.js') }}"></script>
+        {{-- <script src="{{ asset('/js/game.js') }}"></script> --}}
 </body>
 
 </html>

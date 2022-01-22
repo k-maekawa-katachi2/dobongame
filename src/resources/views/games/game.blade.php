@@ -16,7 +16,6 @@
         <div class="row">
             <div class="col-6">
                 @isset($first_player)
-                    {{-- <form action="fighters" method="post" name="word_form"> --}}
                     <form action="fighters" method="post" name="word_form1">
                         @csrf
                         <div class="bgextend bgLRextend">
@@ -27,25 +26,32 @@
                         <p class="box2">言葉はひらがなで入力してください。</p>
                         <p class="box2" style="color:blue;">＊　伸ばす棒「ー」で終わる場合、最後の言葉は棒の一つ手前の文字で判定します。<br>
                             （メーカー　→　この場合「か」で始める）</p>
-                            {{-- <div id="err_word" style=color:red;> --}}
-                            <div id="err_word1" style=color:red;>
-                                {{-- 入力エラー時には、ここにエラーメッセージが表示 --}}
-                            </div>
+                        {{-- バリデーションチェック --}}
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <strong style="color:red;">{{ $error }}</strong>
+                            @endforeach
+                        @endif
+                        {{-- ここまで --}}
+                        {{-- javascriptでのエラーチェック --}}
+                        <div id="err_word1" style=color:red;>
+                            {{-- 入力エラー時には、ここにエラーメッセージが表示 --}}
+                        </div>
                         <div class="box3">
                             {{-- <p><input type="text" id="fighter_word" name="fighter_word"></p> --}}
-                            <p><input type="text" id="fighter_word1" name="fighter_word"></p>
+                            <p><input type="text" id="fighter_word1" name="fighter_word"
+                                    value="{{ old('fighter_word') }}">
+                            </p>
                             <input type="hidden" name="player_id" value="{{ $first_player->id }}">
                             <input type="hidden" name="player_number" value="{{ $first_player->player_number }}">
                             <input type="hidden" name="order_count" value='1'>
                             <input type="hidden" name="turn_count" value="{{ $turn_count }}">
-                            {{-- <input type="submit" value="次へ" onclick="return word()"> --}}
                             <input type="submit" value="次へ" onclick="return word1()">
                         </div>
                     </form>
                 @endisset
 
                 @isset($next_fighter)
-                    {{-- <form action="fighters" method="post" name="word_form"> --}}
                     <form action="fighters" method="post" name="word_form2">
                         @csrf
                         <div class="bgextend bgLRextend">
@@ -58,21 +64,27 @@
                         <p class="box2">言葉はひらがなで入力してください。</p>
                         <p class="box2" style="color:blue;">＊　伸ばす棒「ー」で終わる場合、最後の言葉は棒の一つ手前の文字で判定します。<br>
                             （メーカー　→　この場合「か」で始める）</p>
+                        {{-- バリデーションチェック --}}
+                        @if ($errors->any())
+                            @foreach ($errors->all() as $error)
+                                <strong style="color:red;">{{ $error }}</strong>
+                            @endforeach
+                        @endif
+                        {{-- ここまで --}}
 
-                        {{-- <div id ="err_word" style=color:red;> --}}
+                        {{-- javascriptでのエラーチェック --}}
                         <div id="err_word2" style=color:red;>
                             {{-- 入力エラー時には、ここにエラーメッセージが表示 --}}
                         </div>
 
                         <div class="box3 mt-5">
-                            {{-- <p>{{ $before_word->fighter_word }} ー＞<input type="text" id="fighter_word" name="fighter_word"></p> --}}
-                            <p>{{ $before_word->fighter_word }} ー＞<input type="text" id="fighter_word2" name="fighter_word"></p>
+                            <p>{{ $before_word->fighter_word }} ー＞<input type="text" id="fighter_word2"
+                                    name="fighter_word"></p>
                             <input type="hidden" name="player_id" value="{{ $next_fighter->id }}">
                             <input type="hidden" name="player_number" value="{{ $next_fighter->player_number }}">
                             <input type="hidden" name="order_count" value="{{ $order_count }}">
                             <input type="hidden" name="turn_count" value="{{ $turn_count }}">
                             <input type="hidden" name="last_word" id="last_word" value="{{ $last_word }}">
-                            {{-- <input type="submit" value="次へ" onclick="return word()"> --}}
                             <input type="submit" value="次へ" onclick="return word2()">
                         </div>
                     </form>
