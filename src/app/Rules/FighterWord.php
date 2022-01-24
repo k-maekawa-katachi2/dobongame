@@ -26,7 +26,7 @@ class FighterWord implements Rule
      */
     public function passes($attribute, $value)
     {
-        /** チェック項目*/
+        /*****チェック項目*****/
         //   ひらがなで入力されているか確認。　true=0 false=1 
         $word_check = preg_match('/[^ぁ-んー]/u', $value);
         //  最初の単語と最後の単語を出力する

@@ -64,7 +64,7 @@
                 </div>
             </div>
         </div>
-        {{-- <script src="{{ asset('/js/game.js') }}"></script> --}}
+        <script src="{{ asset('/js/game.js') }}"></script>
 </body>
 
 </html>

@@ -29,10 +29,6 @@ Route::post('demmon_words', 'DemmonController@enter');
 Route::get('start', function () {return view('games.gameStart');})->middleware('auth');;
 Route::get('gameStart', 'DemmonController@gameStart')->middleware('auth');;
 
-// Route::post('player/check', 'PlayersController@check');
-// Route::post('players/last', 'PlayersController@last');
-
-
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
 Auth::routes();

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use App\Rules\RadioCheck;
 
 
 class PlayersController extends Controller
@@ -16,7 +15,7 @@ class PlayersController extends Controller
      * @param int $user_id: ログインユーザーのID
      */
 
-    public function index(Request $request)
+    public function index()
     {
 
         $user_id = Auth::user()->id;
@@ -38,13 +37,18 @@ class PlayersController extends Controller
      */
     public function enter(Request $request)
     {
-    //   dd($request->chara);
+
         // バリデーション
         $validatedData = $request->validate([
-            // "chara" => new RadioCheck,
-             'chara' => 'required'
-            // 'player' => 'required'
+            'chara' => 'required | numeric | between:0,1',
+            'player' => 'required'
+        ], [
+            'chara.required' => '【エラー】：チェックしてください',
+            'chara.numeric' => '【エラー】：数字を入力してください',
+            'chara.between' => '【エラー】：0か1を入力してください',
         ]);
+
+
 
         /**if = computer設定
          * else = デーモンがプレーヤ設定
