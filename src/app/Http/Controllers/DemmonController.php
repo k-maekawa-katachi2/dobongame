@@ -91,7 +91,7 @@ class DemmonController extends Controller
      * 
      * @param string $colum_name: カラム名
      * @param int    $demon_word: 入力した番号
-     * @ string $demon_kana: 入力した番号のひらがな
+     * @return string $demon_kana: 入力した番号のひらがな
      */
     private function oneKana($colum_name, $demon_word)
     {
@@ -143,7 +143,8 @@ class DemmonController extends Controller
     /**
      *  デーモンワードの番号が正しいかチェック
      *    
-     *  @return string $err_msg : 一つでも抜けていたら"エラー"を返す　 
+     *  @param int $return_all : demon_wordの入力値　
+     *  @return string $err_msg: エラーメッセージ 
      */
     private function testCheck($return_all)
     {

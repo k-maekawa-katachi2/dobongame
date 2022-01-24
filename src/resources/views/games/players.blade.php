@@ -18,6 +18,14 @@
                 <form action="players" method="post" name="player_form">
                     @csrf
                     <h4 style="margin-bottom:3rem;">デーモンの種類を決めてください</h4>
+                    {{-- バリデーションチェック --}}
+                    @if ($errors->any())
+                        @foreach ($errors->all() as $error)
+                            <strong style="color:red;">{{ $error }}</strong>
+                        @endforeach
+                    @endif
+                    {{-- ここまで --}}
+
                     {{-- エラー表示 --}}
                     <p><strong id="err_name" style="color:red;"></strong></p>
                     {{-- ここまで --}}
@@ -32,13 +40,6 @@
                         <input type="hidden" name="player_number" value="0">
                     </div>
                     {{-- ここまで --}}
-   {{-- バリデーションチェック --}}
-   @if ($errors->any())
-   @foreach ($errors->all() as $error)
-       <strong style="color:red;">{{ $error }}</strong>
-   @endforeach
-@endif
-{{-- ここまで --}}
                     <div class="row mt-3">
                         <p><input type="radio" name="chara" value="0" title="プレーヤがデーモンになって悪魔の言葉を作成します">コンピューター</p>
                     </div>

@@ -12,12 +12,10 @@ class PlayersController extends Controller
     /**
      * playersのページを表示する
      * （この時に今まで登録した履歴を全て消去する）
-     * @param int $user_id: ログインユーザーのID
      */
 
     public function index()
     {
-
         $user_id = Auth::user()->id;
 
         // ログインユーザの履歴を削除する
@@ -26,14 +24,12 @@ class PlayersController extends Controller
         DB::table('fighter_words')->where('user_id', $user_id)->delete();
 
         session()->forget('chara_id');
-
         return view('games.players');
     }
 
 
     /**
      *  プレーヤの設定・登録
-     * 
      */
     public function enter(Request $request)
     {
@@ -47,8 +43,6 @@ class PlayersController extends Controller
             'chara.numeric' => '【エラー】：数字を入力してください',
             'chara.between' => '【エラー】：0か1を入力してください',
         ]);
-
-
 
         /**if = computer設定
          * else = デーモンがプレーヤ設定
@@ -71,7 +65,6 @@ class PlayersController extends Controller
             ];
         }
 
-
         //  同じ名前が存在するかチェックする　・・　存在する＝戻る条件になる
         $play_number_check = DB::table('players')->where('player', $request->player)->exists();
 
@@ -80,7 +73,6 @@ class PlayersController extends Controller
         } else {
             DB::table('players')->insert($param);
         }
-
 
         //    デーモンの種類の決定とデーモンのデータおよびターン数をセッションで保存
         $chara_id = session()->get('chara_id');

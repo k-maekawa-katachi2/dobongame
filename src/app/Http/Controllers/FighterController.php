@@ -28,14 +28,12 @@ class FighterController extends Controller
         $kana2 = session()->get('demon_kana2');
         $kana3 = session()->get('demon_kana3');
 
-
         // ⓶　ファイターの言葉の最後の文字を取得する
         $check_word = mb_substr($request->fighter_word, -1);
         // 単語の語尾が伸ばす文字「ー」で終わったいるときは「ー」のひとつ前の文字を使う
         if ($check_word == "ー") {
             $check_word = mb_substr($request->fighter_word, -2, 1);
         }
-
 
         // ⓷　デーモンの言葉と一致＝ドボン、　一致しない＝セーフ
         if ($check_word == $kana1->hiragana || $check_word == $kana2->hiragana || $check_word == $kana3->hiragana) {
@@ -111,16 +109,16 @@ class FighterController extends Controller
     /**
      * ムービーを見た後の処理（再読み込みの時も仕様）
      * 
-     * @param array $next_fighter : 次のファイターの情報
-     * @param string $before_word : ひとつ前のファイターが入力した言葉
-     * @param array $fighter_word_all : ファイターが入力した情報の一覧
-     * @param int $turn_count : 現在のターンの回数
-     * @param string $last_word : ファイターの最後の単語　＝　次のファイターがしりとりに使う最初の言葉
-     * @param int $order_count : 次のファイターで表示するカウント
-     * 
      */
     public function afterMovie()
     {
+        // * @param array $next_fighter : 次のファイターの情報
+        // * @param string $before_word : ひとつ前のファイターが入力した言葉
+        // * @param array $fighter_word_all : ファイターが入力した情報の一覧
+        // * @param int $turn_count : 現在のターンの回数
+        // * @param string $last_word : ファイターの最後の単語　＝　次のファイターがしりとりに使う最初の言葉
+        // * @param int $order_count : 次のファイターで表示するカウント
+        
         $next_fighter = session()->get('next_fighter');
         $before_word = session()->get('before_word');
         $fighter_word_all = session()->get('fighter_word_all');
