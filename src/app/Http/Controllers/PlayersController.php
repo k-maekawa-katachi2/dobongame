@@ -36,14 +36,13 @@ class PlayersController extends Controller
 
         // バリデーション
         $validatedData = $request->validate([
-            'chara' => 'required | numeric | between:0,1',
+            'chara' => 'required',
             'player' => 'required'
         ], [
-            'chara.required' => '【エラー】：チェックしてください',
-            'chara.numeric' => '【エラー】：数字を入力してください',
-            'chara.between' => '【エラー】：0か1を入力してください',
+                    'chara.required' => '【エラー】：チェックしてください',
+                    'player.required' => '【エラー】：枠内を入力してください',
         ]);
-
+     
         /**if = computer設定
          * else = デーモンがプレーヤ設定
          */
